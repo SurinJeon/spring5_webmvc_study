@@ -1,17 +1,21 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="spring" uri="http://www.springframework.org/tags" %>
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="UTF-8">
-	<title>회원가입</title>
+	<title><spring:message code="member.register"/></title>
 </head>
 <body>
 	<p>
-		<strong>${registRequest.name }님</strong>
-		회원가입을 완료했습니다.
+		<spring:message code="register.done">
+			<spring:argument value="${registRequest.name }"/>
+			<spring:argument value="${registRequest.email }"/>
+		</spring:message> <!-- argument쓰면 {}이렇게 비워놓은 곳에 argument가 들어감 -->
+		
 	</p>
-	<p><a href="<c:url value='/main'/>">[첫 화면 이동]</a></p> <!-- 컨트롤러 구현 없는 경로 매핑(그냥 그 페이지로 바로 가면 됨) -->
+	<p><a href="<c:url value='/main'/>">[<spring:message code="go.main"/>]</a></p> <!-- 컨트롤러 구현 없는 경로 매핑(그냥 그 페이지로 바로 가면 됨) -->
 </body>
 </html>
