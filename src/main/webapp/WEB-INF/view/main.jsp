@@ -8,7 +8,20 @@
 	<title>메인</title>
 </head>
 <body>
-	<p>환영합니다.</p>
-	<p> <a href="<c:url value="/register/step1"/>">[회원 가입하기]</a> </p>
+authInfo >> ${authInfo }
+	<c:if test="${empty authInfo }"> <!-- session setAttribute한 그거 -->
+		<p>환영합니다.</p>
+		<p> 
+			<a href="<c:url value="/register/step1"/>">[회원 가입하기]</a> 
+			<a href="<c:url value="/login"/>">[로그인]</a> 
+		</p>
+	</c:if>
+	<c:if test="${!empty authInfo }">
+		<p>${authInfo.name }님, 환영합니다.</p>
+		<p> 
+			<a href="<c:url value="/edit/changePassword"/>">[비밀번호 변경]</a> 
+			<a href="<c:url value="/logout"/>">[로그아웃]</a> 
+		</p>
+	</c:if>
 </body>
 </html>
