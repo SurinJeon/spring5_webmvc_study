@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.List;
 
 import org.apache.tomcat.jdbc.pool.DataSource;
@@ -78,4 +79,9 @@ public class MemberDao {
 		jdbcTemplate.update(psc);
 	}
 	
-}
+	// 회원 가입 날짜별 검색
+	public List<Member> selectByRegdate(LocalDateTime from, LocalDateTime to){
+		String sql = "select id, email, password, name, regdate from member where regdate between ? and ? order by regdate desc";
+		return jdbcTemplate.query(sql, new MemberRowMapper(), from, to);
+	}
+} 
